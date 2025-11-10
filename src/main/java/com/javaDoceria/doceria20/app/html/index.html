@@ -1,0 +1,149 @@
+                                                                                                                                                                 <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kesley Cakes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="../img/Senac_logo.svg.png" type="image/svg+xml">
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div id="login-page">
+    <h1 class="titulo-login">Seja bem-vindo(a) à Kesley Cakes</h1>
+    <button class="btn primary" onclick="login()">Entrar</button>
+</div>
+
+<div id="store-page" style="display:none">
+    <header>
+        <div class="container nav">
+            <div class="logo">
+                <span class="logo-badge"></span>
+                <span>Kesley<strong>Cakes</strong></span>
+            </div>
+            <nav class="nav-links">
+                <a href="#home">Início</a>
+                <a href="#produtos">Produtos</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="banner" id="home">
+        <h1>Delícias caseiras para você</h1>
+        <p>Feitos com carinho, como na casa da vovó.</p>
+    </section>
+
+    <section class="dados-cliente container">
+        <h2>Dados do Cliente para Nota Fiscal</h2>
+        <div>
+            <label for="nomeCliente">Nome Completo:</label>
+            <input type="text" id="nomeCliente" placeholder="Seu nome" required pattern="[A-Za-zÀ-ú\s]+">
+        </div>
+        <div>
+            <label for="telefoneCliente">Telefone (com DDD):</label>
+            <input type="text" id="telefoneCliente" placeholder="(XX) XXXXX-XXXX" maxlength="15" required>
+        </div>
+        <div>
+            <label for="idCliente">CPF ou CNPJ:</label>
+            <input type="text" id="idCliente" placeholder="CPF ou CNPJ (OPCIONAL)" maxlength="18">
+        </div>
+    </section>
+    <section class="produtos container" id="produtos">
+        <h2>Nossos Bolos</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://i.ytimg.com/vi/mhDl19m8tn0/maxresdefault.jpg" alt="Bolo de chocolate" />
+                <h3>Bolo de Chocolate</h3>
+                <p>Simples e delicioso.</p>
+                <p><strong>R$ 20,00</strong></p>
+                <button onclick="comprarProduto('Bolo de Chocolate', 20)">Comprar</button>
+            </div>
+            <div class="card">
+                <img src="https://guiadacozinha.com.br/wp-content/uploads/2021/06/Bolo-vulcao-de-cenoura-com-brigadeiro.jpg" alt="Bolo de Cenoura" />
+                <h3>Bolo de Cenoura</h3>
+                <p>Com cobertura de chocolate.</p>
+                <p><strong>R$ 22,00</strong></p>
+                <button onclick="comprarProduto('Bolo de Cenoura', 22)">Comprar</button>
+            </div>
+            <div class="card">
+                <img src="https://bombocadosbs.com.br/wp-content/uploads/2020/02/morango.jpg" alt="Bolo de morango" />
+                <h3>Bolo de Morango</h3>
+                <p>Sabor do interior.</p>
+                <p><strong>R$ 18,00</strong></p>
+                <button onclick="comprarProduto('Bolo de Morango', 18)">Comprar</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="sobre container" id="sobre">
+        <h2>Sobre Nós</h2>
+        <p>Somos uma pequena confeitaria que acredita no poder das receitas tradicionais e do carinho em cada detalhe. Nossos bolos são feitos artesanalmente, com ingredientes selecionados, para trazer aquele gostinho de casa da vovó.</p>
+    </section>
+
+    <section class="contatos container" id="contato">
+        <h2>Contato</h2>
+        <div class="icones-contato">
+            <a href="https://wa.me/61994557954" target="_blank" title="WhatsApp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            </a>
+            <a href="https://www.instagram.com/kesleycakes/" target="_blank" title="Instagram">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            </a>
+            <a href="#" id="pixBtn" title="Pix — clique para copiar, pressione e segure para ver o QR">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/pix.svg"
+                     alt="Pix" style="height:40px; width:auto; filter:invert(23%) sepia(20%) saturate(600%) hue-rotate(350deg) brightness(95%) contrast(90%);">
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; <span id="year"></span> Kesley Cakes. Todos os direitos reservados.
+    </footer>
+</div>
+
+<div id="pagamento">
+    <div id="pagamento-box">
+        <h2 class="loading">Aguardando pagamento</h2>
+        <img id="qrCode" src="C:\Users\Sidnney54183556\Downloads\WhatsApp Image 2025-08-27 at 15.59.04.jpeg" alt="QR Code Pix">
+        <div id="progressBarContainer">
+            <div id="progressBar"></div>
+        </div>
+        <button onclick="fecharPix()" class="btn primary" style="margin-top:20px;">Fechar</button>
+    </div>
+</div>
+
+<div id="notaFiscal">
+    <div class="nota-content">
+        <h2>Nota Fiscal</h2>
+        <p id="notaDetalhes"></p>
+
+        <div class="opcoes-pagamento">
+            <button onclick="selecionarPagamento('dinheiro')" class="btn secondary">Dinheiro</button>
+            <button onclick="selecionarPagamento('cartao')" class="btn secondary">Cartão</button>
+            <a href="https://nubank.com.br/cobrar/ygvil/68a4cfff-08f3-43f2-91f1-c55aa71b52ff"
+               target="_blank"
+               class="btn primary">
+                Pagar via Pix
+            </a>
+        </div>
+        <button onclick="fecharNota()" class="btn secondary" style="margin-top: 15px;">Fechar</button>
+
+    </div>
+</div>
+
+<div id="modalCaixa">
+    <div class="caixa-content">
+        <h2>Pagamento a ser realizado no caixa</h2>
+        <p>Por favor, dirija-se ao caixa para finalizar sua compra. Agradecemos a preferência!</p>
+        <button onclick="fecharModalCaixa()" class="btn">Entendido</button>
+    </div>
+</div>
+
+<script src="../js/app.js"></script>
+
+</body>
+</html>
